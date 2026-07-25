@@ -7,6 +7,27 @@ Instead of another static expense logging CRUD app, **InvestEase AI** automatica
 
 ---
 
+## 👥 Team CodeCrafters
+* **Prince Jha** (Leader & Full-Stack Architect)
+* **Sachin Jha** (Frontend & Data Visualization Lead)
+* **Bhavesh Jadhav** (Backend Services & Database Engineer)
+* **Ishaan Dubey** (AI Integrations & Quality Assurance)
+
+---
+
+## 🛠️ Complete Tech Stack
+
+* **Frontend Framework**: **Next.js 16** (App Router Architecture, React 19)
+* **Styling**: **Tailwind CSS v4** (Custom variables-based dark design system)
+* **Data Visualization**: **Recharts** (Compounding Growth charts & Allocation Pies)
+* **OCR Client Engine**: **Tesseract.js** (Client-side in-browser text recognition)
+* **Backend Runtime**: **Next.js Serverless Route Handlers** (Node.js runtime environment)
+* **Database Layer**: **MongoDB** (Mongoose ORM with connection caching for serverless scale)
+* **Authentication**: **NextAuth.js** (Credentials Provider with cryptographic **bcryptjs** hashing)
+* **Advisory AI**: **Google Gemini API** (`gemini-1.5-flash` model for chat insights & receipt parsing)
+
+---
+
 ## 🗺️ Mermaid Architecture Diagram
 
 ```mermaid
@@ -44,17 +65,62 @@ graph TD
 
 ---
 
-## 📁 Folder Structure
+## 📁 Detailed Folder Structure
 
 ```
 InvestEase AI/
 ├── src/
-│   ├── app/                          # Client layout pages and Serverless API endpoints
-│   ├── components/                   # Theme provider, Sidebar, and Tesseract canvas widgets
-│   ├── lib/                          # Database connection and financial rules calculation engine
-├── public/                           # Vector icons and site assets
-├── package.json                      # Project dependencies
-└── README.md                         # Hackathon Documentation
+│   ├── app/                          # Next.js App Router Pages
+│   │   ├── page.tsx                  # Premium Startup Landing Page
+│   │   ├── login/page.tsx            # Login panel with demo account shortcut
+│   │   ├── register/page.tsx         # Signup form with instant DB seeding hooks
+│   │   ├── dashboard/page.tsx        # Overview stats, categories pie charts, KPI meters
+│   │   ├── expenses/page.tsx         # Transaction ledger & Tesseract OCR scanning panel
+│   │   ├── budget/page.tsx           # Category spend thresholds tracker
+│   │   ├── savings/page.tsx          # Savings goals pots (Macbook, emergency fund)
+│   │   ├── portfolio/page.tsx        # Smart Portfolio Simulator allocations sliders
+│   │   ├── health/page.tsx           # Financial health index scores & radial gauges
+│   │   ├── analytics/page.tsx        # Category shares & compound growth timeline charts
+│   │   ├── ai-assistant/page.tsx     # Spending coach dialogue interface
+│   │   ├── profile/page.tsx          # Income & notify settings preferences
+│   │   ├── settings/page.tsx         # Dark mode configuration and password controls
+│   │   └── api/                      # Serverless API endpoints
+│   │       ├── expenses/route.ts     # CRUD ledger and auto roundup sweeps engine
+│   │       ├── expenses/scan/route.ts # Receipt image OCR text parser
+│   │       ├── portfolio/route.ts    # Get details / update allocation parameters
+│   │       ├── portfolio/simulate/route.ts # Drift asset balances based on volatility
+│   │       ├── dashboard/route.ts    # Aggregates KPI balances and history logs
+│   │       ├── register/route.ts     # User signup & automatic demo populate seeders
+│   │       ├── settings/password/route.ts # Password validation & update flow (bcryptjs)
+│   │       └── chat/route.ts         # Hybrid Gemini Spending coach fallback advisor
+│   ├── components/                   # Shared React UI Components
+│   │   ├── ThemeProvider.tsx         # Context-managed dark styling provider
+│   │   ├── ClientLayout.tsx          # Structural layout viewport splitter
+│   │   ├── Sidebar.tsx               # Left dashboard navigation bar
+│   │   └── ReceiptScanner.tsx        # Drag-and-drop Tesseract canvas processor
+│   ├── lib/                          # Database connection and backend helper rules
+│   │   ├── db.ts                     # Cached MongoDB Mongoose initialization
+│   │   ├── auth.ts                   # NextAuth credentials authentication configuration
+│   │   ├── gemini.ts                 # Gemini configuration & history sanitization helper
+│   │   ├── rules/
+│   │   │   └── health.ts             # Financial Health score calculator rules engine
+│   │   └── models/                   # Mongoose Database Models
+│   │       ├── User.ts               # User schema
+│   │       ├── Expense.ts            # Expense transactions schema
+│   │       ├── Roundup.ts            # Spare change transaction margins
+│   │       ├── Portfolio.ts          # Holdings balances across 5 asset classes
+│   │       ├── Investment.ts         # Log of sweeps history
+│   │       ├── SavingsGoal.ts        # Target pots metrics
+│   │       ├── Notification.ts       # Logs of alert notifications
+│   │       └── Chat.ts               # Chat log contexts
+├── public/                           # Vector icons and site static assets
+├── scratch/                          # Diagnostics script directory (ignored in git)
+│   └── test_scan.js                  # Local parser testing harness
+├── .gitignore                        # Git configuration mappings
+├── .env.example                      # Production environment variables seeding template
+├── package.json                      # Project dependencies and workspace scripts
+├── tsconfig.json                     # TypeScript settings config
+└── README.md                         # Master Hackathon Documentation
 ```
 
 ---
@@ -76,6 +142,7 @@ InvestEase AI/
 * **`/api/portfolio`**: `GET` asset balances and timeline / `PUT` allocations split targets (must sum to 100%).
 * **`/api/portfolio/simulate`**: `POST` market drifts (runs Brownian drift volatility updates).
 * **`/api/expenses/scan`**: `POST` parsing OCR scanned text to return JSON fields.
+* **`/api/settings/password`**: `POST` checks current password and saves hashed credentials.
 
 ---
 
@@ -86,22 +153,61 @@ Create `.env` in root:
 MONGODB_URI=mongodb://127.0.0.1:27017/investease
 NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=investease-ai-secret-key-987654321
-GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_API_KEY=your_google_gemini_api_key_here
 ```
 
 ---
 
-## 📦 Installation & Setup
+## 📦 Complete Installation & Setup
 
-1. **Install Modules:** `npm install`
-2. **Start MongoDB:** Local daemon on port 27017 or MongoDB Atlas URI.
-3. **Run Dev Server:** `npm run dev`
-4. **Instant Seeding:** Click **"Launch Instantly with Demo Account"** at `/login` to auto-populate history.
-5. **OCR Diagnostics:** Run `node scratch/test_scan.js` to verify offline parser regex rules locally.
+Follow these steps to set up the project locally:
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/pjha91275/InvestEase-AI.git
+   cd InvestEase-AI
+   ```
+
+2. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables:**
+   * Duplicate `.env.example` and rename it to `.env`:
+     ```bash
+     cp .env.example .env
+     ```
+   * Open `.env` and fill in your keys (e.g. MongoDB URI and Gemini API Key).
+
+4. **Launch Local MongoDB Instance:**
+   * Ensure you have MongoDB running locally on port 27017:
+     ```bash
+     # (Default path: mongodb://127.0.0.1:27017/investease)
+     mongod
+     ```
+
+5. **Start Development Server:**
+   ```bash
+   npm run dev
+   ```
+   * Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to view the application.
+
+6. **Seed Initial Demo Data:**
+   * Go to the Login Page at `/login`.
+   * Click **"Launch Instantly with Demo Account"** to automatically create the `demo@investease.ai` user and populate 6 months of historical budgets, goals, transactions, and swept micro-investments.
+
+7. **Verify OCR Engine Locally (Optional):**
+   * Run the regex parser diagnostic harness script:
+     ```bash
+     node scratch/test_scan.js
+     ```
 
 ---
 
-## 🚶 Demo Script
+## 🚶 Recommended Demo & Testing Script
+
+To review the primary features of the platform step-by-step:
 
 1. **Overview Dashboard**: Highlight the CRED-style dark-mode widgets at `/dashboard`.
 2. **Ledger & OCR Scanner**: Click **Scan Receipt** at `/expenses`. Upload an invoice to trigger auto-fields.
@@ -123,15 +229,6 @@ GEMINI_API_KEY=your_gemini_api_key_here
   * Tesseract.js processes images in the browser to avoid server load bottlenecks and Vercel timeout execution limit flags.
 * **Q: How realistic is the Portfolio Simulator return rates model?**
   * We implement a drift model inspired by Geometric Brownian Motion. Each asset class drifts based on its real-world volatility (Stocks and Crypto experience wider swings, while Gold and Index Funds remain steady) for a realistic educational environment.
-
----
-
-## 🚀 Deployment Guide (Vercel)
-
-1. **Push Repository**: Push the codebase to GitHub.
-2. **Import to Vercel**: Create a new project on Vercel and link your GitHub repo.
-3. **Configure Environment variables**: Paste the MongoDB Atlas connection URL, your NextAuth Secret, and your Gemini API key in the project settings.
-4. **Deploy**: Click **Deploy**. Vercel will build, optimize static chunks, and serve the API routes dynamically.
 
 ---
 
