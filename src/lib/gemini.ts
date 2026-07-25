@@ -25,11 +25,23 @@ export async function askGemini(prompt: string, chatHistory: any[] = []): Promis
     Provide structured, encouraging guidance on budget advice, savings, expense analysis, emergency funds, UPI safety, scam awareness, tax basics, and credit scores. 
     Limit responses to 2-3 paragraphs. Use lists where helpful. Avoid speculative stock predictions.`;
 
+    const sanitizedHistory: any[] = [];
+    let expectedRole = 'user';
+    for (const h of chatHistory) {
+      if (h.role === expectedRole) {
+        sanitizedHistory.push(h);
+        expectedRole = expectedRole === 'user' ? 'model' : 'user';
+      }
+    }
+    if (sanitizedHistory.length > 0 && sanitizedHistory[sanitizedHistory.length - 1].role === 'user') {
+      sanitizedHistory.pop();
+    }
+
     const chat = model.startChat({
       history: [
         { role: 'user', parts: [{ text: systemPrompt }] },
         { role: 'model', parts: [{ text: 'I am InvestEase AI, ready to assist.' }] },
-        ...chatHistory,
+        ...sanitizedHistory,
       ],
     });
 

@@ -34,14 +34,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Please enter a message' }, { status: 400 });
     }
 
-    // Save User message
-    await Chat.create({
-      userId: session.user.id,
-      role: 'user',
-      message: prompt,
-    });
-
-    // Retrieve last 10 messages from DB for chat context
+    // Retrieve last 10 messages from DB for chat context (before saving the current message)
     const recentChats = await Chat.find({ userId: session.user.id })
       .sort({ createdAt: -1 })
       .limit(10);
@@ -51,6 +44,13 @@ export async function POST(req: Request) {
       role: chat.role === 'user' ? 'user' : 'model',
       parts: [{ text: chat.message }],
     }));
+
+    // Save User message
+    await Chat.create({
+      userId: session.user.id,
+      role: 'user',
+      message: prompt,
+    });
 
     let replyText = '';
     try {
