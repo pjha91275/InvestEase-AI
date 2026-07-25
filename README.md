@@ -97,6 +97,7 @@ GEMINI_API_KEY=your_gemini_api_key_here
 2. **Start MongoDB:** Local daemon on port 27017 or MongoDB Atlas URI.
 3. **Run Dev Server:** `npm run dev`
 4. **Instant Seeding:** Click **"Launch Instantly with Demo Account"** at `/login` to auto-populate history.
+5. **OCR Diagnostics:** Run `node scratch/test_scan.js` to verify offline parser regex rules locally.
 
 ---
 
