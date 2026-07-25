@@ -222,8 +222,8 @@ To review the primary features of the platform step-by-step:
 
 * **Q: How does the roundup sweep execute?**
   * Intercepted inside the expense post route. It calculates `Math.ceil(amount) - amount`, increments allocations balances, and inserts an investment sweep log.
-* **Q: What if the Gemini Key is missing?**
-  * Redirects queries silently to `getLocalAdvisorResponse` in `src/app/api/chat/route.ts` matching budget and savings keywords for high-fidelity responses.
+* **Q: What if the Gemini Key is missing or invalid?**
+  * The serverless API routes catch the exception and bubble up a detailed error description (such as credentials mismatch, network timeouts, or rate limits) directly to the UI's red warning banner for transparent diagnostics.
 * **Q: How is the Financial Health Score calculated?**
   * Checks savings margins, overspent budget ratios, necessity weights, emergency fund milestones, and rebalancing diversification to output a score (0-100).
 * **Q: Why is OCR client-side?**
