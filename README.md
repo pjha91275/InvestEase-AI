@@ -47,7 +47,7 @@ graph TD
 ## 📁 Folder Structure
 
 ```
-InvestEase AI/
+InvestEase-AI/
 ├── src/
 │   ├── app/
 │   │   ├── page.tsx                  # Premium Startup Landing Page
