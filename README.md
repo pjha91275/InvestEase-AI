@@ -69,7 +69,7 @@ graph TD
 ## 📁 Detailed Folder Structure
 
 ```
-InvestEase AI/
+InvestEase-AI/
 ├── src/
 │   ├── app/                          # Next.js App Router Pages
 │   │   ├── page.tsx                  # Premium Startup Landing Page
