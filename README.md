@@ -8,23 +8,24 @@ Instead of another static expense logging CRUD app, **InvestEase AI** automatica
 ---
 
 ## 👥 Team CodeCrafters
-* **Prince Jha** (Leader & Full-Stack Architect)
-* **Sachin Jha** (Frontend & Data Visualization Lead)
-* **Bhavesh Jadhav** (Backend Services & Database Engineer)
-* **Ishaan Dubey** (AI Integrations & Quality Assurance)
+* **Prince Jha** (Leader)
+* **Sachin Jha**
+* **Bhavesh Jadhav**
+* **Ishaan Dubey**
 
 ---
 
 ## 🛠️ Complete Tech Stack
 
-* **Frontend Framework**: **Next.js 16** (App Router Architecture, React 19)
-* **Styling**: **Tailwind CSS v4** (Custom variables-based dark design system)
-* **Data Visualization**: **Recharts** (Compounding Growth charts & Allocation Pies)
-* **OCR Client Engine**: **Tesseract.js** (Client-side in-browser text recognition)
-* **Backend Runtime**: **Next.js Serverless Route Handlers** (Node.js runtime environment)
-* **Database Layer**: **MongoDB** (Mongoose ORM with connection caching for serverless scale)
-* **Authentication**: **NextAuth.js** (Credentials Provider with cryptographic **bcryptjs** hashing)
-* **Advisory AI**: **Google Gemini API** (`gemini-1.5-flash` model for chat insights & receipt parsing)
+* **Programming Language**: **TypeScript** (Fully typed codebase for robust type checking and safety)
+* **Frontend Framework**: **React.js (React 19)** & **Next.js 16** (Component-based App Router modular interface)
+* **Backend Runtime**: **Node.js** & **Express-style Serverless Endpoints** (Next.js serverless API routes architecture)
+* **Styling**: **Tailwind CSS v4** (Custom utility and variables-based dark design system)
+* **Data Visualization**: **Recharts** (Interactive Area compounding timelines & Allocations Pie charts)
+* **OCR Client Engine**: **Tesseract.js** (In-browser optical character recognition processing)
+* **Database Layer**: **MongoDB** (Mongoose ODM utilizing cached database connection pooling)
+* **Authentication**: **NextAuth.js** (Credential flow featuring cryptographic **bcryptjs** hashing checks)
+* **Advisory AI**: **Google Gemini API** (`gemini-1.5-flash` model for intelligent text parsing & Spending Coach)
 
 ---
 
