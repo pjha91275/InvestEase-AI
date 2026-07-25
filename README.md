@@ -25,7 +25,7 @@ Instead of another static expense logging CRUD app, **InvestEase AI** automatica
 * **OCR Client Engine**: **Tesseract.js** (In-browser optical character recognition processing)
 * **Database Layer**: **MongoDB** (Mongoose ODM utilizing cached database connection pooling)
 * **Authentication**: **NextAuth.js** (Credential flow featuring cryptographic **bcryptjs** hashing checks)
-* **Advisory AI**: **Google Gemini API** (`gemini-2.0-flash` model for intelligent text parsing & Spending Coach)
+* **Advisory AI**: **Google Gemini API** (`gemini-3.5-flash` model for intelligent text parsing & Spending Coach)
 
 ---
 

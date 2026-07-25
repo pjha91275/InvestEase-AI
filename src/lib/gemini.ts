@@ -1,8 +1,8 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const apiKey = process.env.GEMINI_API_KEY;
-// Using the latest, high-yield gemini-2.0-flash model
-const MODEL_NAME = 'gemini-2.0-flash';
+// Using the latest, active gemini-3.5-flash model
+const MODEL_NAME = 'gemini-3.5-flash';
 
 // Create the model instance if key exists
 const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
