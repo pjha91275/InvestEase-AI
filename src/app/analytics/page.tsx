@@ -268,7 +268,7 @@ export default function Analytics() {
                 Seeding sweeps logs...
               </div>
             )}
-          </Card>
+          </CardContent>
         </Card>
 
         {/* Category Breakdown Bar Chart */}
@@ -321,7 +321,7 @@ export default function Analytics() {
                           <Cell key={`cell-${index}`} fill={ALLOC_COLORS[index % ALLOC_COLORS.length]} />
                         ))}
                       </Pie>
-                      <Tooltip formatter={(value) => `₹${value.toFixed(2)}`} contentStyle={chartTooltipStyle} />
+                      <Tooltip formatter={(value: any) => `₹${Number(value || 0).toFixed(2)}`} contentStyle={chartTooltipStyle} />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>

@@ -473,7 +473,7 @@ export default function PortfolioSimulator() {
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Pie>
-                    <Tooltip formatter={(value) => `₹${value.toFixed(2)}`} />
+                    <Tooltip formatter={(value: any) => `₹${Number(value || 0).toFixed(2)}`} />
                   </PieChart>
                 </ResponsiveContainer>
                 <div className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none">

@@ -165,7 +165,7 @@ export async function POST(req: Request) {
 
       // Create roundups for each expense seed
       const generatedRoundups: any[] = [];
-      createdExpenses.forEach((exp) => {
+      createdExpenses.forEach((exp: any) => {
         const amt = exp.amount;
         const rounded = Math.ceil(amt);
         const diff = Number((rounded - amt).toFixed(2));
@@ -235,7 +235,7 @@ export async function POST(req: Request) {
         });
       });
 
-      monthlyRoundupSeeds.forEach(r => {
+      monthlyRoundupSeeds.forEach((r: any) => {
         r.roundedAmount = Math.ceil(r.originalAmount);
         r.amount = Number((r.roundedAmount - r.originalAmount).toFixed(2));
       });
