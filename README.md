@@ -1,35 +1,54 @@
 # InvestEase AI 🚀
-### Every Rupee Counts. Every Round-Up Builds Your Future.
 
-**InvestEase AI** is a premium, national-hackathon-winning financial wellness platform designed to solve a universal consumer problem: people spend money daily without realizing how minor, unused fractions (change margins) can build compounding wealth over time. 
+**InvestEase AI** is a premium, financial wellness and virtual micro-investment platform designed to solve a universal consumer problem: people spend money daily without realizing how minor, unused fractions (change margins) can build compounding wealth over time. 
 
 Instead of another static expense logging CRUD app, **InvestEase AI** automatically captures spare changes on transaction clearances, allocates them according to custom asset distributions, and sweeps them into a virtual portfolio simulator. It is packed with browser-based OCR receipt scanning, dynamic Recharts visualizations, a financial health scoring engine, and a fallback AI Spending Coach.
 
 ---
 
-## 👥 Team CodeCrafters
-* **Prince Jha** (Leader)
-* **Sachin Jha**
-* **Bhavesh Jadhav**
-* **Ishaan Dubey**
+## ✨ Features
+
+- **🛡️ Secure Credentials Authentication**: Seamless login and signup workflows powered by **NextAuth.js** featuring cryptographic **bcryptjs** password hashing and instant demo seeding checks.
+- **💰 Automatic Spare Change Sweep**: Intercepts expense entries, automatically calculates spare change margins (e.g., rounding up a ₹421.65 expense to ₹422.00, sweeping ₹0.35), and allocates it across user-defined asset portfolios.
+- **📈 Smart Portfolio Simulator**: Real-time virtual investment portfolio simulator supporting custom allocations across 5 asset classes (Index Funds, Mutual Funds, Stocks, Gold, and Crypto). Features Brownian motion-based market drift simulation to educationalize risk.
+- **🔍 In-Browser OCR Receipt Scanner**: Powerful client-side optical character recognition powered by **Tesseract.js** that parses uploaded transaction images and extracts amount, vendor, category, and date directly in-browser to avoid server load bottlenecks.
+- **📊 Advanced Analytics Dashboard**: Dynamic, interactive financial reports visualising compounding timelines, asset allocations, and category expense distributions using **Recharts** charts.
+- **🎯 Savings Goals Pots**: Dedicated target milestones (e.g., Emergency Fund, Bike, Macbook) tracking progressive savings with visual meters.
+- **🚦 Category Budgets & Alerts**: Establish monthly limits per spending category with live status thresholds and system notifications.
+- **🎛️ Financial Health Scoring Engine**: Algorithmic assessment calculating user financial wellness (0-100 score) based on emergency fund status, budget utilization, necessity weights, savings margins, and diversification indices.
+- **💬 Hybrid AI Spending Coach**: Interactive conversation assistant powered by **Google Gemini API** (`gemini-3.5-flash` model) that provides custom budgeting advice, transaction analysis, and tailored financial feedback.
+- **⚡ Instant Demo Seeding**: A quick-launch gate that builds a simulated account with 6 months of historical budgets, goals, and transactions instantly for seamless evaluation.
 
 ---
 
-## 🛠️ Complete Tech Stack
+## 👥 Development Team
+This is a collaborative team project designed and built by:
 
-* **Programming Language**: **TypeScript** (Fully typed codebase for robust type checking and safety)
-* **Frontend Framework**: **React.js (React 19)** & **Next.js 16** (Component-based App Router modular interface)
-* **Backend Runtime**: **Node.js** & **Express-style Serverless Endpoints** (Next.js serverless API routes architecture)
-* **Styling**: **Tailwind CSS v4** (Custom utility and variables-based dark design system)
-* **Data Visualization**: **Recharts** (Interactive Area compounding timelines & Allocations Pie charts)
-* **OCR Client Engine**: **Tesseract.js** (In-browser optical character recognition processing)
-* **Database Layer**: **MongoDB** (Mongoose ODM utilizing cached database connection pooling)
-* **Authentication**: **NextAuth.js** (Credential flow featuring cryptographic **bcryptjs** hashing checks)
-* **Advisory AI**: **Google Gemini API** (`gemini-3.5-flash` model for intelligent text parsing & Spending Coach)
+Prince Jha
+Sachin Jha
 
 ---
 
-## 🗺️ Mermaid Architecture Diagram
+## 🛠️ Technology Stack
+
+- **Frontend Framework**: [React.js 19](https://react.dev/) & [Next.js 16 (App Router)](https://nextjs.org/)
+- **Backend Framework / Runtime**: [Node.js](https://nodejs.org/) with Express-style Serverless API Endpoints (Next.js serverless API routes architecture)
+- **Programming Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Database**: [MongoDB](https://www.mongodb.com/)
+- **Object Modeling (ORM/ODM)**: [Mongoose ODM](https://mongoosejs.com/)
+- **Authentication**: [NextAuth.js](https://next-auth.js.org/)
+- **Password Encryption / Security**: [Bcrypt.js](https://github.com/dcodeIO/bcrypt.js) (for cryptographic hashing verification)
+- **AI Model Integration**: [Google Gemini Pro API](https://ai.google.dev/) (`gemini-3.5-flash` model for advisory spending coach logic)
+- **OCR Text Processing Engine**: [Tesseract.js](https://tesseract.projectnaptha.com/) (in-browser optical character recognition)
+- **Interactive Data Visualization**: [Recharts](https://recharts.org/) (for rendering compounding growth timelines, asset allocations, and KPI indicators)
+- **Aesthetic UI Animation**: [Framer Motion](https://www.framer.com/motion/) (for smooth animations and transitions)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (custom dark design system and styling utility classes)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Flowcharts & System Mapping**: [Mermaid.js](https://mermaid.js.org/) (for rendering system architectures within documentation)
+
+---
+
+## 🗺️ System Architecture
 
 ```mermaid
 graph TD
@@ -66,7 +85,7 @@ graph TD
 
 ---
 
-## 📁 Detailed Folder Structure
+## 📁 Project Structure
 
 ```
 InvestEase-AI/
@@ -126,83 +145,104 @@ InvestEase-AI/
 
 ---
 
-## 🗄️ Database Models
-* **User**: Profile details (monthly salary and savings targets).
-* **Expense**: Spend transactions and OCR-scanned details.
-* **Roundup**: Fraction difference margins (e.g. ₹0.35 saved from a ₹421.65 expense).
-* **Portfolio**: Holdings across Index Funds, Mutual Funds, Stocks, Gold, and Crypto.
-* **Investment**: Logs detailing allocations applied to sweeps.
-* **SavingsGoal**: Target pot milestones (Emergency Fund, Bike, Macbook).
-* **Notification**: Log triggers for overspent alerts and returns simulation.
+## 🗄️ Database Schema & Models
+
+- **User**: Contains profile details, monthly salary, and target savings percentages.
+- **Expense**: Stores transactional entries including transaction amounts, categories, vendors, dates, and OCR-extracted logs.
+- **Roundup**: Tracks fraction difference margins computed on transaction clearances (e.g. ₹0.35 saved from a ₹421.65 expense).
+- **Portfolio**: Tracks aggregate holding balances across the 5 asset classes (Stocks, Index Funds, Mutual Funds, Gold, Crypto).
+- **Investment**: Logs detailing applied sweep histories and allocation weights.
+- **SavingsGoal**: Stores milestones target pots (e.g., Emergency Fund, Bike, Macbook) and progress trackers.
+- **Notification**: Alerts history detailing overspent notifications, target limits, and return simulator drift logs.
+- **Chat**: Holds persistent conversational context data for the Google Gemini AI spending coach.
 
 ---
 
-## 🔌 API Routes Summary
+## 🔌 Serverless API Endpoints
 
-* **`/api/expenses`**: `GET` transactions list / `POST` transaction. Calculates roundups and splits them across portfolio balances.
-* **`/api/portfolio`**: `GET` asset balances and timeline / `PUT` allocations split targets (must sum to 100%).
-* **`/api/portfolio/simulate`**: `POST` market drifts (runs Brownian drift volatility updates).
-* **`/api/expenses/scan`**: `POST` parsing OCR scanned text to return JSON fields.
-* **`/api/settings/password`**: `POST` checks current password and saves hashed credentials.
+- **`GET /api/dashboard`**: Aggregates general user statistics, transaction trends, and dynamic KPI balances.
+- **`GET | POST /api/expenses`**: Fetches the transaction history log and posts new expenses. Automatically runs the roundups sweep logic.
+- **`POST /api/expenses/scan`**: Accepts file uploads to process and parse client-side receipt images, responding with structured transaction values.
+- **`GET | PUT /api/portfolio`**: Obtains investment distribution holdings and updates custom percentage allocations (must sum to 100%).
+- **`POST /api/portfolio/simulate`**: Triggers a Brownian motion market drift volatility simulator to recalculate portfolio balances.
+- **`GET /api/health`**: Runs logic evaluating budgets, savings, and assets to update user's financial wellness index score.
+- **`POST /api/settings/password`**: Handles password updates via cryptographic bcrypt verification.
+- **`POST /api/chat`**: Initiates Gemini AI conversation completions containing user profiles and financial contexts.
 
 ---
 
-## ⚙️ Environment Variables
+## 💻 Local Setup & Installation
 
-Create `.env` in root:
-```ini
+Follow these steps to configure and run the InvestEase AI development environment on your machine:
+
+### Prerequisites
+Make sure you have the following installed:
+- [Node.js](https://nodejs.org/) (v18.x or higher recommended)
+- [MongoDB](https://www.mongodb.com/try/download/community) (either running locally or a MongoDB Atlas Cloud URI)
+
+---
+
+### Step-by-Step Guide
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/pjha91275/InvestEase-AI.git
+cd InvestEase-AI
+```
+
+### 2. Install Project Dependencies
+```bash
+npm install
+```
+
+### 3. Configure Environment Variables
+Create a file named `.env` in the root of the project:
+```bash
+# Windows command line / PowerShell:
+New-Item .env -ItemType File
+```
+Open `.env` and configure the following variables:
+```env
+# Database Connection URI
 MONGODB_URI=mongodb://127.0.0.1:27017/investease
+
+# NextAuth Configuration
 NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=investease-ai-secret-key-987654321
+NEXTAUTH_SECRET=generate_a_random_32_character_string_here
+
+# Google Gemini API Key
 GEMINI_API_KEY=your_google_gemini_api_key_here
+```
+
+### 4. Run the Development Server
+Ensure your MongoDB server is active, then launch the Next.js local compiler:
+```bash
+npm run dev
+```
+Open your browser and navigate to **[http://localhost:3000](http://localhost:3000)**.
+
+### 5. Seed Initial Demo Data
+- Go to the Login Page at `/login`.
+- Click **"Launch Instantly with Demo Account"** to automatically create the `demo@investease.ai` user and populate 6 months of historical budgets, goals, transactions, and swept micro-investments.
+
+### 6. Build for Production
+To build and optimize the project for deployment:
+```bash
+npm run build
+npm run start
 ```
 
 ---
 
-## 📦 Complete Installation & Setup
+## ☁️ Deployment
 
-Follow these steps to set up the project locally:
-
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/pjha91275/InvestEase-AI.git
-   cd InvestEase-AI
-   ```
-
-2. **Install Dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Configure Environment Variables:**
-   * Duplicate `.env.example` and rename it to `.env`:
-     ```bash
-     cp .env.example .env
-     ```
-   * Open `.env` and fill in your keys (e.g. MongoDB URI and Gemini API Key).
-
-4. **Launch Local MongoDB Instance:**
-   * Ensure you have MongoDB running locally on port 27017:
-     ```bash
-     # (Default path: mongodb://127.0.0.1:27017/investease)
-     mongod
-     ```
-
-5. **Start Development Server:**
-   ```bash
-   npm run dev
-   ```
-   * Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to view the application.
-
-6. **Seed Initial Demo Data:**
-   * Go to the Login Page at `/login`.
-   * Click **"Launch Instantly with Demo Account"** to automatically create the `demo@investease.ai` user and populate 6 months of historical budgets, goals, transactions, and swept micro-investments.
-
-7. **Verify OCR Engine Locally (Optional):**
-   * Run the regex parser diagnostic harness script:
-     ```bash
-     node scratch/test_scan.js
-     ```
+When deploying to platforms like **Vercel**, **Netlify**, or **Render**:
+1. Do **not** commit `.env` to Git.
+2. In the hosting provider's dashboard, configure the Production Environment variables:
+   - `MONGODB_URI` -> Point to a live **MongoDB Atlas** database cloud string.
+   - `NEXTAUTH_URL` -> Set to the live website URL (e.g. `https://yourdomain.com`).
+   - `NEXTAUTH_SECRET` -> Generate a new cryptographically secure secret.
+   - `GEMINI_API_KEY` -> Your live Google Gemini API Key.
 
 ---
 
@@ -218,23 +258,14 @@ To review the primary features of the platform step-by-step:
 
 ---
 
-## 👩‍⚖️ Judge FAQs with Answers
+## 🔮 Future Scope & Improvements
 
-* **Q: How does the roundup sweep execute?**
-  * Intercepted inside the expense post route. It calculates `Math.ceil(amount) - amount`, increments allocations balances, and inserts an investment sweep log.
-* **Q: What if the Gemini Key is missing or invalid?**
-  * The serverless API routes catch the exception and bubble up a detailed error description (such as credentials mismatch, network timeouts, or rate limits) directly to the UI's red warning banner for transparent diagnostics.
-* **Q: How is the Financial Health Score calculated?**
-  * Checks savings margins, overspent budget ratios, necessity weights, emergency fund milestones, and rebalancing diversification to output a score (0-100).
-* **Q: Why is OCR client-side?**
-  * Tesseract.js processes images in the browser to avoid server load bottlenecks and Vercel timeout execution limit flags.
-* **Q: How realistic is the Portfolio Simulator return rates model?**
-  * We implement a drift model inspired by Geometric Brownian Motion. Each asset class drifts based on its real-world volatility (Stocks and Crypto experience wider swings, while Gold and Index Funds remain steady) for a realistic educational environment.
+- **📱 Mobile App SMS Scraper**: Build a companion mobile application (React Native/Flutter) with background SMS reading permissions to intercept real-time UPI and debit card transaction alerts, automating micro-investments without manual input.
+- **🏦 Real-World Broker Integrations**: Integrate live brokerage APIs (e.g., Zerodha, Groww, Upstox) or sandbox digital gold/mutual fund APIs to route virtual sweeps into actual assets.
+- **👨‍👩‍👧‍👦 Family Co-Investment Pools**: Allow partners or families to combine spare changes to build joint emergency pots and achieve common saving goals.
+- **🤖 Autonomous Financial Agent**: Implement self-executing budget rebalancing suggestions, automated threshold adjustments based on historic spending patterns, and voice-assisted AI coaching.
 
 ---
 
-## 🔮 Future Scope
-
-1. **UPI/Debit Card SMS Scraper**: Mobile app companion reading transaction alerts to automate roundups without manual tracking.
-2. **Real Investment Broker integrations**: Connect roundups to mutual fund SIPs, purchasing fractional digital gold, or index baskets on every checkout sweep.
-3. **Multi-User Family Pools**: Allow partners or families to combine their spare changes to build joint emergency pots.
+## ⚖️ License
+This project is licensed under the ISC License.
