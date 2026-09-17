@@ -2,7 +2,7 @@
 
 **InvestEase AI** is a premium, financial wellness and virtual micro-investment platform designed to solve a universal consumer problem: people spend money daily without realizing how minor, unused fractions (change margins) can build compounding wealth over time. 
 
-Instead of another static expense logging CRUD app, **InvestEase AI** automatically captures spare changes on transaction clearances, allocates them according to custom asset distributions, and sweeps them into a virtual portfolio simulator. It is packed with browser-based OCR receipt scanning, dynamic Recharts visualizations, a financial health scoring engine, and a fallback AI Spending Coach.
+Instead of another static expense logging CRUD app, **InvestEase AI** automatically captures spare changes on transaction clearances, allocates them according to custom asset distributions, and sweeps them into a virtual portfolio simulator. It is packed with browser-based OCR receipt scanning, dynamic Recharts visualizations, a financial health scoring engine, and an interactive Google Gemini AI Spending Coach with regex parsing fallbacks.
 
 ---
 
@@ -77,6 +77,7 @@ graph TD
         DB === Roundups[(Roundups)]
         DB === Portfolio[(Portfolios)]
         DB === Investments[(Investments)]
+        DB === Budgets[(Budgets)]
         DB === SavingsGoal[(SavingsGoals)]
         DB === Notification[(Notifications)]
         DB === Chat[(Chat Logs)]
@@ -105,19 +106,33 @@ InvestEase-AI/
 │   │   ├── profile/page.tsx          # Income & notify settings preferences
 │   │   ├── settings/page.tsx         # Dark mode configuration and password controls
 │   │   └── api/                      # Serverless API endpoints
+│   │       ├── auth/[...nextauth]/route.ts # NextAuth authentication handler
+│   │       ├── budgets/route.ts      # Monthly category budget limits
+│   │       ├── chat/route.ts         # Google Gemini Spending coach assistant
+│   │       ├── dashboard/route.ts    # Aggregates KPI balances and history logs
 │   │       ├── expenses/route.ts     # CRUD ledger and auto roundup sweeps engine
-│   │       ├── expenses/scan/route.ts # Receipt image OCR text parser
+│   │       ├── expenses/scan/route.ts # AI & Regex parsing of OCR receipt text
+│   │       ├── health/route.ts       # 0-100 Financial health score engine
 │   │       ├── portfolio/route.ts    # Get details / update allocation parameters
 │   │       ├── portfolio/simulate/route.ts # Drift asset balances based on volatility
-│   │       ├── dashboard/route.ts    # Aggregates KPI balances and history logs
+│   │       ├── profile/route.ts      # Profile details & notification settings
 │   │       ├── register/route.ts     # User signup & automatic demo populate seeders
-│   │       ├── settings/password/route.ts # Password validation & update flow (bcryptjs)
-│   │       └── chat/route.ts         # Hybrid Gemini Spending coach fallback advisor
+│   │       ├── savings/route.ts      # Savings goal pots CRUD & allocations
+│   │       ├── settings/route.ts     # Theme & account settings
+│   │       └── settings/password/route.ts # Password validation & update flow (bcryptjs)
 │   ├── components/                   # Shared React UI Components
 │   │   ├── ThemeProvider.tsx         # Context-managed dark styling provider
 │   │   ├── ClientLayout.tsx          # Structural layout viewport splitter
+│   │   ├── Navbar.tsx                # Top navigation and user status bar
 │   │   ├── Sidebar.tsx               # Left dashboard navigation bar
-│   │   └── ReceiptScanner.tsx        # Drag-and-drop Tesseract canvas processor
+│   │   ├── ReceiptScanner.tsx        # Drag-and-drop Tesseract canvas processor
+│   │   └── ui/                       # Reusable UI component library
+│   │       ├── Button.tsx            # Styled action button component
+│   │       ├── Card.tsx              # Glassmorphic container card
+│   │       ├── Gauge.tsx             # Radial financial health gauge
+│   │       ├── Input.tsx             # Form input field
+│   │       ├── Progress.tsx          # Progress bar meter
+│   │       └── Select.tsx            # Dropdown selector
 │   ├── lib/                          # Database connection and backend helper rules
 │   │   ├── db.ts                     # Cached MongoDB Mongoose initialization
 │   │   ├── auth.ts                   # NextAuth credentials authentication configuration
@@ -125,6 +140,7 @@ InvestEase-AI/
 │   │   ├── rules/
 │   │   │   └── health.ts             # Financial Health score calculator rules engine
 │   │   └── models/                   # Mongoose Database Models
+│   │       ├── Budget.ts             # Monthly spending limits & category thresholds
 │   │       ├── User.ts               # User schema
 │   │       ├── Expense.ts            # Expense transactions schema
 │   │       ├── Roundup.ts            # Spare change transaction margins
@@ -133,8 +149,11 @@ InvestEase-AI/
 │   │       ├── SavingsGoal.ts        # Target pots metrics
 │   │       ├── Notification.ts       # Logs of alert notifications
 │   │       └── Chat.ts               # Chat log contexts
+│   └── types/                        # TypeScript declaration extensions
+│       └── next-auth.d.ts            # Session and JWT type declarations
 ├── public/                           # Vector icons and site static assets
 ├── scratch/                          # Diagnostics script directory (ignored in git)
+│   ├── test_gemini.js                # Gemini API integration test harness
 │   └── test_scan.js                  # Local parser testing harness
 ├── .gitignore                        # Git configuration mappings
 ├── .env.example                      # Production environment variables seeding template
@@ -148,6 +167,7 @@ InvestEase-AI/
 ## 🗄️ Database Schema & Models
 
 - **User**: Contains profile details, monthly salary, and target savings percentages.
+- **Budget**: Manages monthly expenditure limits and category-wise spending thresholds.
 - **Expense**: Stores transactional entries including transaction amounts, categories, vendors, dates, and OCR-extracted logs.
 - **Roundup**: Tracks fraction difference margins computed on transaction clearances (e.g. ₹0.35 saved from a ₹421.65 expense).
 - **Portfolio**: Tracks aggregate holding balances across the 5 asset classes (Stocks, Index Funds, Mutual Funds, Gold, Crypto).
@@ -162,12 +182,16 @@ InvestEase-AI/
 
 - **`GET /api/dashboard`**: Aggregates general user statistics, transaction trends, and dynamic KPI balances.
 - **`GET | POST /api/expenses`**: Fetches the transaction history log and posts new expenses. Automatically runs the roundups sweep logic.
-- **`POST /api/expenses/scan`**: Accepts file uploads to process and parse client-side receipt images, responding with structured transaction values.
+- **`POST /api/expenses/scan`**: Receives extracted OCR text from client-side scanning and parses structured transaction values (merchant, amount, date, category) via Gemini AI with a regex fallback.
+- **`GET | POST /api/budgets`**: Retrieves and updates monthly category budget thresholds.
+- **`GET | POST | PUT | DELETE /api/savings`**: Manages savings goal pots, progress tracking, and deposits.
 - **`GET | PUT /api/portfolio`**: Obtains investment distribution holdings and updates custom percentage allocations (must sum to 100%).
-- **`POST /api/portfolio/simulate`**: Triggers a Brownian motion market drift volatility simulator to recalculate portfolio balances.
+- **`POST /api/portfolio/simulate`**: Triggers a market drift volatility simulator to recalculate portfolio balances.
 - **`GET /api/health`**: Runs logic evaluating budgets, savings, and assets to update user's financial wellness index score.
+- **`GET | PUT /api/profile`**: Manages user profile information, income, and notification preferences.
+- **`POST /api/settings`**: Updates user application configuration and preferences.
 - **`POST /api/settings/password`**: Handles password updates via cryptographic bcrypt verification.
-- **`POST /api/chat`**: Initiates Gemini AI conversation completions containing user profiles and financial contexts.
+- **`GET | POST /api/chat`**: Initiates Gemini AI conversation completions containing user profiles and financial contexts.
 
 ---
 
