@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import LogoIcon from '@/components/LogoIcon';
 
 export default function LandingPage() {
   const [openFaq, setOpenFaq] = React.useState<number | null>(null);
@@ -319,9 +320,9 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t border-border-color py-12 mt-16 bg-card-sec/20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2">
-            <div className="p-1.5 bg-accent-primary rounded-lg text-white">
-              <Shield className="h-4 w-4" />
+          <div className="flex items-center gap-2 group">
+            <div className="p-1.5 bg-slate-950 dark:bg-slate-900 border border-slate-800 rounded-lg flex items-center justify-center shadow-xs">
+              <LogoIcon className="h-4.5 w-4.5" />
             </div>
             <span className="text-sm font-semibold tracking-tight text-text-primary">
               InvestEase <span className="text-accent-primary">AI</span>

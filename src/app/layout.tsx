@@ -16,6 +16,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "InvestEase AI - Premium AI-Powered Financial Wellness",
   description: "Budget tracking and Tesseract-powered receipts OCR scanning.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

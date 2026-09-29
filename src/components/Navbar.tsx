@@ -3,9 +3,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
-import { Shield, LayoutDashboard, LogOut, Sun, Moon } from 'lucide-react';
+import { LayoutDashboard, LogOut, Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
 import { Button } from '@/components/ui/Button';
+import LogoIcon from '@/components/LogoIcon';
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -18,8 +19,8 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="p-1.5 bg-accent-primary rounded-lg text-white">
-                <Shield className="h-4.5 w-4.5" />
+              <div className="p-1.5 bg-slate-950 dark:bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform duration-200">
+                <LogoIcon className="h-5 w-5" />
               </div>
               <span className="text-base font-semibold tracking-tight text-text-primary">
                 InvestEase <span className="text-accent-primary">AI</span>

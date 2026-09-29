@@ -17,12 +17,12 @@ import {
   Settings,
   User,
   LogOut,
-  Shield,
   Menu,
   X,
   TrendingUp
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import LogoIcon from '@/components/LogoIcon';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -47,9 +47,9 @@ export default function Sidebar() {
     <>
       {/* Mobile Top Header Bar */}
       <div className="md:hidden sticky top-0 z-40 w-full bg-card border-b border-border-color px-6 py-3 flex items-center justify-between transition-colors duration-200">
-        <Link href="/dashboard" className="flex items-center gap-2">
-          <div className="p-1.5 bg-accent-primary rounded-lg text-white">
-            <Shield className="h-4 w-4" />
+        <Link href="/dashboard" className="flex items-center gap-2 group">
+          <div className="p-1.5 bg-slate-950 dark:bg-slate-900 border border-slate-800 rounded-lg flex items-center justify-center shadow-xs">
+            <LogoIcon className="h-4.5 w-4.5" />
           </div>
           <span className="text-sm font-semibold tracking-tight text-text-primary">
             InvestEase <span className="text-accent-primary text-xs">AI</span>
@@ -81,8 +81,8 @@ export default function Sidebar() {
           {/* Logo Header */}
           <div className="hidden md:flex items-center justify-between">
             <Link href="/dashboard" className="flex items-center gap-2.5 group">
-              <div className="p-1.5 bg-accent-primary rounded-lg text-white">
-                <Shield className="h-4.5 w-4.5" />
+              <div className="p-1.5 bg-slate-950 dark:bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform duration-200">
+                <LogoIcon className="h-5 w-5" />
               </div>
               <span className="text-base font-semibold tracking-tight text-text-primary">
                 InvestEase <span className="text-accent-primary">AI</span>

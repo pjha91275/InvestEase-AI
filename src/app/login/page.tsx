@@ -4,10 +4,11 @@ import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
-import { Shield, Lock, AlertCircle, CheckCircle, Loader2 } from 'lucide-react';
+import { Lock, AlertCircle, CheckCircle, Loader2 } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card';
+import LogoIcon from '@/components/LogoIcon';
 
 function LoginContent() {
   const router = useRouter();
@@ -90,8 +91,8 @@ function LoginContent() {
     <Card className="w-full max-w-md border border-border-color p-8 rounded-[20px] bg-card shadow-sm">
       <CardHeader className="text-center flex flex-col items-center p-0 mb-6">
         <Link href="/" className="flex items-center gap-2.5 group mb-4">
-          <div className="p-1.5 bg-accent-primary rounded-lg text-white">
-            <Shield className="h-4.5 w-4.5" />
+          <div className="p-1.5 bg-slate-950 dark:bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform duration-200">
+            <LogoIcon className="h-5 w-5" />
           </div>
           <span className="text-base font-semibold tracking-tight text-text-primary">
             InvestEase <span className="text-accent-primary">AI</span>
